@@ -23,6 +23,7 @@ public class listview extends Fragment {
                 R.array.Days,
                 android.R.layout.simple_list_item_1);
 
+        mylist.setAdapter(myAdapter);
         return view;
     }
 
