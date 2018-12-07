@@ -19,9 +19,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         txt_main = findViewById(R.id.txt_main);
         txt_input = findViewById(R.id.txt_input);
     }
+
 
     public void showSchedule(View view)
     {
