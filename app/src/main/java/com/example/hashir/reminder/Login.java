@@ -29,8 +29,8 @@ public class Login extends Fragment {
         email = (EditText) view.findViewById(R.id.etxt_login_email);
         password = (EditText) view.findViewById(R.id.etxt_login_password);
 
-        Intent intent = new Intent(getActivity(), MainActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(getActivity(), MainActivity.class);
+//        startActivity(intent);
 
         Button btn = view.findViewById(R.id.login);
         btn.setOnClickListener(new View.OnClickListener() {
