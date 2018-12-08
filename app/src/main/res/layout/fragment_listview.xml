@@ -5,10 +5,46 @@
     android:layout_height="match_parent"
     tools:context=".listview">
 
-
     <ListView
         android:id="@+id/myList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="100dp" />
+        android:layout_height="350dp">
+
+    </ListView>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left"
+        android:layout_marginLeft="50dp"
+        android:layout_marginBottom="200dp"
+        android:text="@string/select_your_option"
+        android:textSize="18sp" />
+
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/radio_group"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="130dp"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/radio_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add"
+            android:focusable="true" />
+
+        <RadioButton
+            android:id="@+id/radio_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/show"
+            android:focusable="true" />
+    </RadioGroup>
+
 </FrameLayout>

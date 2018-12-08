@@ -1,14 +1,19 @@
 package com.example.hashir.reminder;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 public class listview extends Fragment {
@@ -31,8 +36,15 @@ public class listview extends Fragment {
         {
             @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
+                String day = String.valueOf(parent.getItemAtPosition(position));
 
-                Toast.makeText(getContext(), "Stop Clicking me", Toast.LENGTH_SHORT).show();
+                Fragment fragmentB = new Add();
+                Bundle bundle = new Bundle();
+                bundle.putString("day", day);
+                fragmentB.setArguments(bundle);
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.fLayout, fragmentB )
+                        .commit();
             }
         });
 

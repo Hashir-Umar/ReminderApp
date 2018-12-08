@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.fLayout, fragment);
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
         ImageView img = findViewById(R.id.imageView);
