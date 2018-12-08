@@ -29,9 +29,6 @@ public class Login extends Fragment {
         email = (EditText) view.findViewById(R.id.etxt_login_email);
         password = (EditText) view.findViewById(R.id.etxt_login_password);
 
-        Intent intent = new Intent(getActivity(), MainActivity.class);
-        startActivity(intent);
-
         Button btn = view.findViewById(R.id.login);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,29 +38,28 @@ public class Login extends Fragment {
 
                 if(email_txt.length() == 0 )
                     email.setError( "Email required!");
-                if(password_txt.length() == 0 )
+                else if(password_txt.length() == 0 )
                     password.setError( "Password required!" );
+                else {
+                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences("userData", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("userData", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
+                    String loginEmail = sharedPreferences.getString("email", "");
+                    String loginPassword = sharedPreferences.getString("password", "");
 
-                String loginEmail = sharedPreferences.getString("email", "");
-                String loginPassword = sharedPreferences.getString("password", "");
+                    Boolean email_flag = loginEmail.equals(email_txt);
+                    Boolean password_flag = loginPassword.equals(password_txt);
 
-                Boolean email_flag = loginEmail.equals(email_txt);
-                Boolean password_flag = loginPassword.equals(password_txt);
-
-                if(!email_flag) {
-                    email.setError( "Invalid Email" );
-                }
-
-                if(!password_flag) {
-                    password.setError( "Invalid Password" );
-                }
-
-                if(email_flag && email_flag) {
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                    startActivity(intent);
+                    if (!email_flag) {
+                        email.setError("Invalid Email");
+                    }
+                    else if (!password_flag) {
+                        password.setError("Invalid Password");
+                    }
+                    else if (email_flag && email_flag) {
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        startActivity(intent);
+                    }
                 }
             }
         });

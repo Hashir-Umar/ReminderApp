@@ -1,6 +1,7 @@
 package com.example.hashir.reminder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -38,18 +39,41 @@ public class Signup extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                String username_txt = username.getText().toString();
                 String email_txt = email.getText().toString();
                 String password_txt = password.getText().toString();
-                String username_txt = username.getText().toString();
+                String c_password_txt = confirm.getText().toString();
 
-                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("userData", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
+                if(username_txt.length() == 0 ) {
+                    username.setError( "Username required!");
+                }
+                else if(email_txt.length() == 0 )
+                    email.setError( "Email required!");
+                else if(password_txt.length() == 0 ) {
+                    password.setError( "Password required!");
+                }
+                else if(c_password_txt.length() == 0 )
+                    confirm.setError( "Reenter your password required!");
 
-                editor.putString("username", username_txt);
-                editor.putString("email", email_txt);
-                editor.putString("password", password_txt);
-                editor.apply();
+                else if(!password_txt.equals(c_password_txt)) {
+                    password.setError( "Password Does not match!");
+                    confirm.setError( "Password Does not match!");
+                }
+                else {
 
+                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences("userData", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                    editor.putString("username", username_txt);
+                    editor.putString("email", email_txt);
+                    editor.putString("password", password_txt);
+                    editor.apply();
+
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    startActivity(intent);
+
+                }
             }
         });
 
