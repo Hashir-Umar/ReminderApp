@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -22,6 +23,9 @@ public class listview extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_listview, container, false);
+
+        ImageView img_hide = getActivity().findViewById(R.id.imageView);
+        img_hide.setVisibility(View.VISIBLE);
 
         ListView mylist = (ListView) view.findViewById(R.id.myList);
 
@@ -38,12 +42,22 @@ public class listview extends Fragment {
             {
                 String day = String.valueOf(parent.getItemAtPosition(position));
 
-                Fragment fragmentB = new Add();
+                RadioGroup radioGroup = getActivity().findViewById(R.id.radio_group);
+                RadioButton radioButton = getActivity().findViewById(radioGroup.getCheckedRadioButtonId());
+                final String value = radioButton.getText().toString();
+                boolean flag = value.equals("Add");
+                Fragment fragmentB;
+
+                if(flag)
+                    fragmentB = new Add();
+                else
+                    fragmentB = new Show();
+
                 Bundle bundle = new Bundle();
                 bundle.putString("day", day);
                 fragmentB.setArguments(bundle);
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.fLayout, fragmentB )
+                        .replace(R.id.fLayout, fragmentB)
                         .commit();
             }
         });
